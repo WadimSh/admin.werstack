@@ -15,6 +15,7 @@ export default function ShopList({ appendToCart }) {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         data.items && setItems(data.items.slice(0, 24));
         setLoading(false);
       });

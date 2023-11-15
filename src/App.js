@@ -5,11 +5,11 @@ import Content from "./components/content";
 
 function App() {
   return (
-    <React.Fragment>
+    <>
       <Header />
       <Content />
       <Footer />
-    </React.Fragment>
+    </>
   );
 }
 

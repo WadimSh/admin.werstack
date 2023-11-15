@@ -3,7 +3,7 @@ import CartIcon from './cart-icon';
 import CartList from './cart-list';
 import ShopList from './shop-list';
 
-export default function Content() {
+const Content = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
 
@@ -41,3 +41,5 @@ export default function Content() {
     </main>
   );
 }
+
+export default Content;

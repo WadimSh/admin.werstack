@@ -1,4 +1,4 @@
-export default function Header() {
+const Header = () => {
   return (
     <header>
       <nav className="teal lighten-1">
@@ -13,3 +13,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

@@ -1,4 +1,4 @@
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="page-footer teal lighten-1">
       <div className="container">
@@ -7,3 +7,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;
