@@ -28,10 +28,9 @@ export default function CartList(props) {
               <th>$</th>
             </tr>
             <tr>
-              <th colSpan="4"></th>
-              <th>
-                <button className="btn-small right" style={{margin: "10px"}} onClick={props.handleOrder}>
-                  Оформить заказ
+              <th colSpan="5">
+                <button disabled={!props.textButton} className="btn-small right" style={{margin: "10px"}} onClick={props.handleOrder}>
+                  {props.textButton ? 'Оформить заказ' : 'ok'}
                 </button>
               </th>
             </tr>

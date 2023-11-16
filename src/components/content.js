@@ -8,6 +8,7 @@ const Content = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showAlert, setShowAlert] = useState(null);
+  const [textButton, setTextButton] = useState(true);
   
   const appendToCart = (item, quantity = 1) => {
     const itemIndex = cartItems.findIndex(value => value.id === item.id);
@@ -38,9 +39,14 @@ const Content = () => {
   const handleAlert = () => setShowAlert(null);
 
   const handleOrder = () => {
-    setShowAlert('Ваш заказ успешно принят в обработку!')
+    setTextButton(false);
+    const timeoutId = setTimeout(() => {
+    setShowAlert('Ваш заказ успешно принят в обработку!');
+    setTextButton(true);
     setCartItems([]);
-    setShowCart(!showCart);
+    setShowCart(!showCart);  
+    }, 2000);
+    return () => clearTimeout(timeoutId);
   };
   
   return (
@@ -48,7 +54,7 @@ const Content = () => {
       <CartIcon length={cartItems.length} toggleShow={toggleShow} />
       {showAlert && <ShowAlert text={showAlert} handleAlert={handleAlert} />}
       <ShopList appendToCart={appendToCart} cartItems={cartItems} />
-      { showCart ? <CartList items={cartItems} toggleShow={toggleShow} removeFromCart={removeFromCart} handleOrder={handleOrder} /> : null }
+      { showCart ? <CartList items={cartItems} textButton={textButton} toggleShow={toggleShow} removeFromCart={removeFromCart} handleOrder={handleOrder} /> : null }
     </main>
   );
 }
