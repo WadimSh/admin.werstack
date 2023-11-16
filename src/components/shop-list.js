@@ -3,7 +3,7 @@ import { API_KEY, API_URL_LIST } from "../config";
 import Preloader from './preloader';
 import ShopCard from './shop-card';
 
-export default function ShopList({ appendToCart }) {
+export default function ShopList({ appendToCart, cartItems }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ export default function ShopList({ appendToCart }) {
         <Preloader />
       ) : items.length ? (
         items.map(item => (
-          <ShopCard key={item.id} appendToCart={appendToCart} {...item} />
+          <ShopCard key={item.id} appendToCart={appendToCart} cartItems={cartItems} {...item} />
         ))
       ) : (
         <p>Не удалось загрузить список</p>
