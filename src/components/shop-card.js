@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ShopCard(props) {
   const [cost, setCost] = useState(null);
   const { id, name, price, images } = props;
   const item = {id: id, name: name, price: price};
-  
+
   const handleAppend = (val) => {
     props.appendToCart(val);
     const itemIndex = props.cartItems.find(value => value.id === item.id);
@@ -14,6 +14,15 @@ export default function ShopCard(props) {
       setCost(1);
     }
   };
+
+  useEffect(() => {
+    const itemIndex = props.cartItems.find(value => value.id === item.id);
+    if (itemIndex !== undefined) {
+      setCost(itemIndex.quantity);
+    } else {
+      setCost(null);
+    }
+  }, [props.cartItems])
     
   return (
     <div id={"product-" + id} className="card">

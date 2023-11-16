@@ -2,12 +2,8 @@ import { useState } from 'react';
 import CartItem from './cart-item';
 
 export default function CartList(props) {
-  const [oder, setOder] = useState(null);
   const cost = props.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const handleCart = () => {
-
-  };
-  
+    
   return (
     <div className="cart-modal">
       <i className="material-icons cart-modal-close" onClick={props.toggleShow}>
@@ -35,8 +31,8 @@ export default function CartList(props) {
             <tr>
               <th colSpan="4"></th>
               <th>
-                <button className="btn-small right" style={{margin: "10px"}}>
-                  {cost !== null ? `Вы купили ${cost}` : 'Купить'}
+                <button className="btn-small right" style={{margin: "10px"}} onClick={props.handleOrder}>
+                  Оформить заказ
                 </button>
               </th>
             </tr>
