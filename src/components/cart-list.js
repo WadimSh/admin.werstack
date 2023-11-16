@@ -30,7 +30,7 @@ export default function CartList(props) {
             <tr>
               <th colSpan="5">
                 <button disabled={!props.textButton} className="btn-small right" style={{margin: "10px"}} onClick={props.handleOrder}>
-                  {props.textButton ? 'Оформить заказ' : 'ok'}
+                  {props.textButton ? 'Оформить заказ' : 'Заказ отправлен'}
                 </button>
               </th>
             </tr>

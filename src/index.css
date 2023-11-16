@@ -87,3 +87,24 @@ nav {
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
+
+@media screen and (max-width: 1200px) {
+  .items {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .items {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
