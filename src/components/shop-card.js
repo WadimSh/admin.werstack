@@ -22,7 +22,7 @@ export default function ShopCard(props) {
     } else {
       setCost(null);
     }
-  }, [props.cartItems])
+  }, [props.cartItems, item.id])
     
   return (
     <div id={"product-" + id} className="card">

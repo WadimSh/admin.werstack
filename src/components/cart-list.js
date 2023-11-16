@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import CartItem from './cart-item';
 
 export default function CartList(props) {
