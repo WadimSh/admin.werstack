@@ -88,6 +88,14 @@ nav {
   gap: 8px;
 }
 
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
 @media screen and (max-width: 1200px) {
   .items {
     grid-template-columns: repeat(3, 1fr);
