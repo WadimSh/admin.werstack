@@ -30,18 +30,20 @@ export default function ShopList({ appendToCart, cartItems }) {
   }, []);
 
   useEffect(() => {
-    setCheck(list.length);
-    setItems(list.slice(0, step));
-  }, [list, step])
-
-  useEffect(() => {
-    setCheck(resaltSearch.length);
-    setItems(resaltSearch.slice(0, step));
-    
-  }, [resaltSearch])
+    if (resaltSearch.length || !searchs) {
+      setCheck(resaltSearch.length);
+      setItems(resaltSearch.slice(0, step));
+      if (step > resaltSearch.length) {
+        setButton(true);
+      }
+    } else {
+      setCheck(list.length);
+      setItems(list.slice(0, step));
+    }
+  }, [resaltSearch, searchs, list, step])
   
   const addItems = () => {
-    if (step <= check) {
+    if (step < check) {
       setStep(step + 24);
     } else {
       setButton(true);
