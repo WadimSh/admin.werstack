@@ -3,7 +3,6 @@ import CartIcon from './cart-icon';
 import CartList from './cart-list';
 import ShopList from './shop-list';
 import ShowAlert from './show-alert';
-import SearchFrom from './search-form';
 
 const Content = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -75,12 +74,11 @@ const Content = () => {
     }, 2000);
     return () => clearTimeout(timeoutId);
   };
-  
+
   return (
     <main className="container">
       <CartIcon length={cartItems.length} toggleShow={toggleShow} />
       {showAlert && <ShowAlert text={showAlert} handleAlert={handleAlert} />}
-      <SearchFrom />
       <ShopList appendToCart={appendToCart} cartItems={cartItems} />
       { showCart ? <CartList 
                     items={cartItems} 

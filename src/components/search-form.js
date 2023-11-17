@@ -11,7 +11,7 @@ const SearchFrom = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(query);
+    props.searchCard(query);
   }
 
   return (

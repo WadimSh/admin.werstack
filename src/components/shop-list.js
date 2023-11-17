@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { API_KEY, API_URL_LIST } from "../config";
 import Preloader from './preloader';
 import ShopCard from './shop-card';
+import SearchFrom from './search-form';
 
 export default function ShopList({ appendToCart, cartItems }) {
   const [list, setList] = useState([]);
@@ -35,12 +36,20 @@ export default function ShopList({ appendToCart, cartItems }) {
     }
   };
 
+  const searchCard = (query) => {
+    let result = list.filter((item) => {
+      return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    })
+    setItems(result);
+  };
+
   return (
     <div>
       {loading ? (
         <Preloader />
       ) : items.length ? (
         <>
+          <SearchFrom searchCard={searchCard} />
           <div className="items">
             {items.map(item => (
               <ShopCard key={item.id} appendToCart={appendToCart} cartItems={cartItems} {...item} />
