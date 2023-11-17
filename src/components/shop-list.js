@@ -5,11 +5,16 @@ import ShopCard from './shop-card';
 import SearchFrom from './search-form';
 
 export default function ShopList({ appendToCart, cartItems }) {
+  const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [check, setCheck] = useState(0);
+  
   const [step, setStep] = useState(24);
   const [button, setButton] = useState(false);
+
+  const [resaltSearch, setResaltSearch] = useState([]);
+  const [searchs, setSearchs] = useState(true);
     
   useEffect(() => {
     fetch(API_URL_LIST, {
@@ -25,11 +30,18 @@ export default function ShopList({ appendToCart, cartItems }) {
   }, []);
 
   useEffect(() => {
+    setCheck(list.length);
     setItems(list.slice(0, step));
   }, [list, step])
+
+  useEffect(() => {
+    setCheck(resaltSearch.length);
+    setItems(resaltSearch.slice(0, step));
+    
+  }, [resaltSearch])
   
   const addItems = () => {
-    if (step <= list.length) {
+    if (step <= check) {
       setStep(step + 24);
     } else {
       setButton(true);
@@ -40,9 +52,12 @@ export default function ShopList({ appendToCart, cartItems }) {
     let result = list.filter((item) => {
       return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     })
-    setItems(result);
+    setResaltSearch(result);
+    if (result.length === 0) {
+      setSearchs(false);
+    }
   };
-
+  
   return (
     <div>
       {loading ? (
@@ -62,7 +77,7 @@ export default function ShopList({ appendToCart, cartItems }) {
           </div>
         </>
       ) : (
-        <p>Не удалось загрузить список</p>
+        searchs ? <p>Не удалось загрузить список</p> : <p>По вашему запросу ничего не найдено</p>
       )}
     </div>
   );
