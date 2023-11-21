@@ -51,13 +51,9 @@ export default function ShopList({ appendToCart, cartItems }) {
   };
 
   const searchCard = (query) => {
-    let result = list.filter((item) => {
-      return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    })
+    let result = list.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
     setResaltSearch(result);
-    if (result.length === 0) {
-      setSearchs(false);
-    }
+    (result.length === 0) && setSearchs(false);
   };
   
   return (
@@ -79,7 +75,7 @@ export default function ShopList({ appendToCart, cartItems }) {
           </div>
         </>
       ) : (
-        searchs ? <p>Не удалось загрузить список</p> : <p>По вашему запросу ничего не найдено</p>
+        <p>{searchs ? 'Не удалось загрузить список' : 'По вашему запросу ничего не найдено'}</p>
       )}
     </div>
   );

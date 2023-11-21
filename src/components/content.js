@@ -23,7 +23,7 @@ const Content = () => {
         ...cartItems[itemIndex],
         quantity: cartItems[itemIndex].quantity + quantity
       };
-      const newCart = cartItems.slice();
+      const newCart = [...cartItems];
       newCart.splice(itemIndex, 1, newItem);
       setCartItems(newCart);
     }
@@ -34,31 +34,28 @@ const Content = () => {
     setCartItems(newCart);
   };
 
-  const addQuantityCart = (id) => {
+  const updateQuantity = (id, delta) => {
     const itemIndex = cartItems.findIndex(value => value.id === id);
-    const newItem = {
-      ...cartItems[itemIndex],
-      quantity: cartItems[itemIndex].quantity + 1
-    };
-    const newCart = cartItems.slice();
-    newCart.splice(itemIndex, 1, newItem);
-    setCartItems(newCart);
-  }
+
+    if (itemIndex >= 0) {
+      const newItem = { ...cartItems[itemIndex], quantity: cartItems[itemIndex].quantity + delta };
+      if (newItem.quantity <= 0) {
+        removeFromCart(id);
+      } else {
+        const newCart = [...cartItems];
+        newCart.splice(itemIndex, 1, newItem);
+        setCartItems(newCart);
+      }
+    }
+  };
+
+  const addQuantityCart = (id) => {
+    updateQuantity(id, 1);
+  };
 
   const denyQuantityCart = (id) => {
-    const itemIndex = cartItems.findIndex(value => value.id === id);
-    if (cartItems[itemIndex].quantity <= 1) {
-      removeFromCart(id);
-    } else {
-      const newItem = {
-        ...cartItems[itemIndex],
-        quantity: cartItems[itemIndex].quantity - 1
-      };
-      const newCart = cartItems.slice();
-      newCart.splice(itemIndex, 1, newItem);
-      setCartItems(newCart);
-    } 
-  }
+    updateQuantity(id, -1);
+  };
 
   const toggleShow = () => setShowCart(!showCart);
 
@@ -80,15 +77,16 @@ const Content = () => {
       <CartIcon length={cartItems.length} toggleShow={toggleShow} />
       {showAlert && <ShowAlert text={showAlert} handleAlert={handleAlert} />}
       <ShopList appendToCart={appendToCart} cartItems={cartItems} />
-      { showCart ? <CartList 
-                    items={cartItems} 
-                    textButton={textButton} 
-                    toggleShow={toggleShow} 
-                    removeFromCart={removeFromCart} 
-                    handleOrder={handleOrder} 
-                    addQuantityCart={addQuantityCart} 
-                    denyQuantityCart={denyQuantityCart}
-                  /> : null }
+      { showCart && (<CartList 
+                      items={cartItems} 
+                      textButton={textButton} 
+                      toggleShow={toggleShow} 
+                      removeFromCart={removeFromCart} 
+                      handleOrder={handleOrder} 
+                      addQuantityCart={addQuantityCart} 
+                      denyQuantityCart={denyQuantityCart}
+                    />)
+      }
     </main>
   );
 }
